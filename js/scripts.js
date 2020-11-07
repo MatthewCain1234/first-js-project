@@ -1,17 +1,25 @@
 let pokemonList = [
-  Bulbasaur = {
+  {
+    name: "Bulbasaur",
     height: 0.7,
-    weight: 6.9,
     type: ["grass", "poison"]
   },
-  Charmander = {
+  {
+    name: "Charmander",
     height: 0.6,
-    weight: 8.9,
     type: ["fire"]
   },
-  Squirtle = {
+  {
+    name: "Squirtle",
     height: 0.5,
-    weight: 9,
     type: ["water"]
   }
 ]
+
+for (i=0;i<pokemonList.length;i++) {
+  if (pokemonList[i].type == "fire") {
+    document.write(pokemonList[i].name + " (" + pokemonList[i].height + ")" + "- This one's a fire type! ")
+  } else {
+  document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ") ")
+  }
+}
