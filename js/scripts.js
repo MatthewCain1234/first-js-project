@@ -1,4 +1,5 @@
-let pokemonList = [
+pokemonRepository = (function () {
+  let pokemonList = [
   {
     name: "Bulbasaur",
     height: 0.7,
@@ -13,18 +14,39 @@ let pokemonList = [
     name: "Squirtle",
     height: 0.5,
     type: ["water"]
+  }];
+
+  function add(pokemon) {
+    pokemonList.push(pokemon);
   }
-];
+
+  function getAll() {
+    return pokemonList;
+  }
+
+  return {
+    add: add,
+    getAll: getAll
+  }
+})();
+
+pokemonRepository.add(
+  {
+    name: "Caterpie",
+    height: 0.3,
+    type: ["bug"]
+  }
+);
 
 function printArrayDetails(inputArray) {
-  for (i=0;i<pokemonList.length;i++) {
-  if (inputArray[i].type == "fire") {
-    document.write(inputArray[i].name + " (" + inputArray[i].height + ")" + "- This one's a fire type! ");
+  inputArray.forEach(function(input)
+   {
+  if (input.type == "fire") {
+    document.write(input.name + " (" + input.height + ")" + "- This one's a fire type! ");
   } else {
-    document.write(inputArray[i].name + " (height: " + inputArray[i].height + ") ");
+    document.write(input.name + " (height: " + input.height + ") ");
     }
-  }
+  })
 }
 
-printArrayDetails(pokemonList);
-printArrayDetails(pokemonList);
+printArrayDetails(pokemonRepository.getAll());
