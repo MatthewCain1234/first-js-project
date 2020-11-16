@@ -14,12 +14,17 @@ let pokemonList = [
     height: 0.5,
     type: ["water"]
   }
-]
+];
 
-for (i=0;i<pokemonList.length;i++) {
-  if (pokemonList[i].type == "fire") {
-    document.write(pokemonList[i].name + " (" + pokemonList[i].height + ")" + "- This one's a fire type! ")
+function printArrayDetails(inputArray) {
+  for (i=0;i<pokemonList.length;i++) {
+  if (inputArray[i].type == "fire") {
+    document.write(inputArray[i].name + " (" + inputArray[i].height + ")" + "- This one's a fire type! ");
   } else {
-  document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ") ")
+    document.write(inputArray[i].name + " (height: " + inputArray[i].height + ") ");
+    }
   }
 }
+
+printArrayDetails(pokemonList);
+printArrayDetails(pokemonList);
