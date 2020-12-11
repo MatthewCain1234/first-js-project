@@ -1,4 +1,6 @@
 let pokemonRepository = (function () {
+  let modalContainer = document.querySelector('.modal-container');
+
   let repository = [];
   let apiUrl ='https://pokeapi.co/api/v2/pokemon/?limit=151';
 
@@ -25,11 +27,47 @@ let pokemonRepository = (function () {
     button.addEventListener('click', () => details(pokemon))
   }
 
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+  function showDetails(pokemon){
+    loadDetails(pokemon).then(function (){
+      console.log(pokemon)
+
+      modalContainer.innerHTML = '';
+      let modal = document.createElement('div');
+      modal.classList.add('modal');
+
+      let closeButtonElement = document.createElement('button');
+      closeButtonElement.classList.add('modal-close');
+      closeButtonElement.innerText = 'X';
+      closeButtonElement.addEventListener('click', hideModal);
+
+      let titleElement = document.createElement('h1');
+      titleElement.innerText = pokemon.name;
+
+      let contentElement = document.createElement('p');
+      contentElement.innerText = 'height: ' + pokemon.height;
+
+      let imageElement = document.createElement('img');
+      imageElement.src = pokemon.imageUrl;
+
+      modal.appendChild(closeButtonElement);
+      modal.appendChild(titleElement);
+      modal.appendChild(contentElement);
+      modal.appendChild(imageElement);
+      modalContainer.appendChild(modal);
+      modalContainer.classList.add('is-visible');
     });
   }
+
+    function hideModal() {
+    modalContainer.classList.remove('is-visible');
+  }
+
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')){
+      hideModal();
+    }
+  });
+
 
   function loadList() {
     return fetch(apiUrl).then(function (response) {
@@ -68,6 +106,8 @@ let pokemonRepository = (function () {
     loadDetails: loadDetails
   };
 })();
+
+
 
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon){
